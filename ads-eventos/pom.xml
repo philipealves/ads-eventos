@@ -11,11 +11,9 @@
 	<url>https://github.com/philipealves/ads-eventos</url>
 
 	<modules>
-		<module>ads-eventos-adm</module>
-    <module>ads-eventos-services</module>
-    <module>ads-eventos-usr</module>
-    <module>ads-eventos-web</module>
-  </modules>
+    	<module>ads-eventos-services</module>
+    	<module>ads-eventos-web</module>
+  	</modules>
 
 	<properties>
 		<!-- hibernate -->
