@@ -1,4 +1,6 @@
-package br.com.iftm.adseventos.service.test;
+package br.com.iftm.adseventos.test;
+
+import java.util.Map;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
@@ -8,9 +10,12 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
-public class GeneralService {
+import javax.inject.Named;
+
+@Named
+public class RequestUtil implements ITestingRequest {
 	
-	protected <T> Response doPost(String uri, T entity) {
+	public <T> Response doPost(String uri, T entity) {
 		
 		try {
 			ResteasyClient client = new ResteasyClientBuilder().build();
@@ -24,7 +29,7 @@ public class GeneralService {
 		
 	}
 	
-	protected Response doDelete(String uri) {
+	public Response doDelete(String uri) {
 		
 		try {
 			ResteasyClient client = new ResteasyClientBuilder().build();
@@ -38,7 +43,7 @@ public class GeneralService {
 		
 	}
 	
-	protected <T> Response doUpdate(String uri, T entity) {
+	public <T> Response doUpdate(String uri, T entity) {
 		
 		try {
 			ResteasyClient client = new ResteasyClientBuilder().build();
@@ -52,11 +57,16 @@ public class GeneralService {
 		
 	}
 
-	protected <T> Response doGet(String uri) {
+	public <T> Response doGet(String uri, Map<String, Object> queryParams) {
 		
 		try {
 			ResteasyClient client = new ResteasyClientBuilder().build();
 			ResteasyWebTarget target = client.target(uri);
+			
+			if(queryParams != null) {
+				queryParams.forEach((paramName, paramValue) -> target.queryParam(paramName, paramValue));
+			}
+			
 			Response response = target.request().get();
 			response.close();
 			return response;

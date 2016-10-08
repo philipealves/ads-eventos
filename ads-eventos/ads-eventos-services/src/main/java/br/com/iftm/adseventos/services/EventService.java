@@ -8,10 +8,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import br.com.iftm.adseventos.services.domain.Event;
-import br.com.iftm.adseventos.services.domain.Participant;
 
 @Path("/event")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -20,7 +20,7 @@ public class EventService {
 	
 	@POST
 	@Path("/signIn/{id}")
-	public void signIn(@PathParam("id") Long eventId, Participant participant) {
+	public void signIn(@PathParam("id") Long eventId, @QueryParam("participant") String participantAsJson) {
 		
 	}
 	
