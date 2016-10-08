@@ -1,26 +1,22 @@
 package br.com.iftm.adseventos.test.service;
 import java.util.HashMap;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.core.Response;
 
-import org.apache.commons.httpclient.HttpStatus;
+import org.apache.http.HttpStatus;
 import org.junit.Assert;
 import org.junit.Test;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import br.com.iftm.adseventos.services.domain.City;
 import br.com.iftm.adseventos.services.domain.Place;
 import br.com.iftm.adseventos.services.domain.State;
-import br.com.iftm.adseventos.test.ITestingRequest;
+import br.com.iftm.adseventos.test.RequestUtil;
 
-public class PlaceServiceTest {
+public class PlaceServiceTest extends RequestUtil {
 	
-	@Inject 
-	@Named("requestUtil") 
-	private ITestingRequest requestUtil;
+//	@Injec 
+//	@Named("requestUtil") 
+//	private ITestingRequest requestUtil;
 	
 	private static final String URL_BASE = "http://localhost:8080/ads-eventos-services/place";
 	
@@ -40,14 +36,14 @@ public class PlaceServiceTest {
 		place.setNumber(423);		
 		place.setCity(city);
 		
-		Response response = requestUtil.doPost(URL_BASE +"/add", place);
+		Response response = super.doPost(URL_BASE +"/add", place);
 		Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
 				response.getStatus() == HttpStatus.SC_NO_CONTENT);
 	}
 	
 	@Test
 	public void deleteById() {
-		Response response = requestUtil.doDelete(URL_BASE + "/delete/" + 1);
+		Response response = super.doDelete(URL_BASE + "/delete/" + 1);
 		Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
 				response.getStatus() == HttpStatus.SC_NO_CONTENT);
 	}
@@ -67,13 +63,13 @@ public class PlaceServiceTest {
 		place.setNumber(423);		
 		place.setCity(city);
 		
-		Response response = requestUtil.doUpdate(URL_BASE + "/update", place);
+		Response response = super.doUpdate(URL_BASE + "/update", place);
 		Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
 				response.getStatus() == HttpStatus.SC_NO_CONTENT);
 	}
 	
 	@Test
-	public void find() throws JsonProcessingException {
+	public void find() {
 		State state = new State();
 		state.setName("Test Find Name");
 		
@@ -90,14 +86,14 @@ public class PlaceServiceTest {
 		HashMap<String, Object> queryParam = new HashMap<>();
 		queryParam.put("place", place);
 
-		Response response = requestUtil.doGet(URL_BASE + "/find", queryParam);
+		Response response = super.doGet(URL_BASE + "/find", queryParam);
 		Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
 				response.getStatus() == HttpStatus.SC_NO_CONTENT);
 	}
 
 	@Test
 	public void findById() {
-		Response response = requestUtil.doGet(URL_BASE + "/find/" + 1, null);
+		Response response = super.doGet(URL_BASE + "/find/" + 1, null);
 		Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
 				response.getStatus() == HttpStatus.SC_NO_CONTENT);
 	}

@@ -10,9 +10,6 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
-import javax.inject.Named;
-
-@Named
 public class RequestUtil implements ITestingRequest {
 	
 	public <T> Response doPost(String uri, T entity) {
