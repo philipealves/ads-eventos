@@ -2,14 +2,15 @@ package br.com.iftm.adseventos.dao;
 
 import br.com.iftm.adseventos.services.domain.Place;
 
-public class PlaceDao {
+public class PlaceDao extends GenericDao<Place> implements IPlaceDao  {
 	
 	public PlaceDao() {
-		MongoDatabaseHelper.createCollection("place");
+		super(PLACE_COLLECTION);
 	}
 	
-	public void add(Place place) {
-		MongoDatabaseHelper.test();
+	@Override
+	public void save(Place place) throws Exception {
+		super.save(place);
 	}
 	
 }

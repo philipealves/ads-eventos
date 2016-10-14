@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.iftm.adseventos.dao.PlaceDao;
+import br.com.iftm.adseventos.dao.IPlaceDao;
 import br.com.iftm.adseventos.services.domain.Place;
 
 @Path("/place")
@@ -25,14 +25,14 @@ import br.com.iftm.adseventos.services.domain.Place;
 public class PlaceService {
 
 	@Inject
-	private PlaceDao placeDao;
+	private IPlaceDao placeDao;
 	
 	@POST
 	@Path("/add")
 	public void add(Place place) {
 		try {
 			System.out.println("Add: " + new ObjectMapper().writeValueAsString(place));
-			placeDao.add(place);
+			placeDao.save(place);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

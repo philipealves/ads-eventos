@@ -41,61 +41,61 @@ public class PlaceServiceTest extends RequestUtil {
 				response.getStatus() == HttpStatus.SC_NO_CONTENT);
 	}
 	
-	@Test
-	public void deleteById() {
-		Response response = super.doDelete(URL_BASE + "/delete/" + 1);
-		Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
-				response.getStatus() == HttpStatus.SC_NO_CONTENT);
-	}
-	
-	@Test
-	public void update() {
-		State state = new State();
-		state.setName("Test Update Name");
-		
-		City city= new City();
-		city.setName("Test Update City");
-		city.setState(state);
-		
-		Place place = new Place();
-		place.setAddress("Test Update Address");
-		place.setNeighborhood("Test Update neighborhood");
-		place.setNumber(423);		
-		place.setCity(city);
-		
-		Response response = super.doUpdate(URL_BASE + "/update", place);
-		Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
-				response.getStatus() == HttpStatus.SC_NO_CONTENT);
-	}
-	
-	@Test
-	public void find() {
-		State state = new State();
-		state.setName("Test Find Name");
-		
-		City city= new City();
-		city.setName("Test Find City");
-		city.setState(state);
-		
-		Place place = new Place();
-		place.setAddress("Test Find Address");
-		place.setNeighborhood("Test Find neighborhood");
-		place.setNumber(423);		
-		place.setCity(city);
-		
-		HashMap<String, Object> queryParam = new HashMap<>();
-		queryParam.put("place", place);
-
-		Response response = super.doGet(URL_BASE + "/find", queryParam);
-		Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
-				response.getStatus() == HttpStatus.SC_NO_CONTENT);
-	}
-
-	@Test
-	public void findById() {
-		Response response = super.doGet(URL_BASE + "/find/" + 1, null);
-		Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
-				response.getStatus() == HttpStatus.SC_NO_CONTENT);
-	}
+//	@Test
+//	public void deleteById() {
+//		Response response = super.doDelete(URL_BASE + "/delete/" + 1);
+//		Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
+//				response.getStatus() == HttpStatus.SC_NO_CONTENT);
+//	}
+//	
+//	@Test
+//	public void update() {
+//		State state = new State();
+//		state.setName("Test Update Name");
+//		
+//		City city= new City();
+//		city.setName("Test Update City");
+//		city.setState(state);
+//		
+//		Place place = new Place();
+//		place.setAddress("Test Update Address");
+//		place.setNeighborhood("Test Update neighborhood");
+//		place.setNumber(423);		
+//		place.setCity(city);
+//		
+//		Response response = super.doUpdate(URL_BASE + "/update", place);
+//		Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
+//				response.getStatus() == HttpStatus.SC_NO_CONTENT);
+//	}
+//	
+//	@Test
+//	public void find() {
+//		State state = new State();
+//		state.setName("Test Find Name");
+//		
+//		City city= new City();
+//		city.setName("Test Find City");
+//		city.setState(state);
+//		
+//		Place place = new Place();
+//		place.setAddress("Test Find Address");
+//		place.setNeighborhood("Test Find neighborhood");
+//		place.setNumber(423);		
+//		place.setCity(city);
+//		
+//		HashMap<String, Object> queryParam = new HashMap<>();
+//		queryParam.put("place", place);
+//
+//		Response response = super.doGet(URL_BASE + "/find", queryParam);
+//		Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
+//				response.getStatus() == HttpStatus.SC_NO_CONTENT);
+//	}
+//
+//	@Test
+//	public void findById() {
+//		Response response = super.doGet(URL_BASE + "/find/" + 1, null);
+//		Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
+//				response.getStatus() == HttpStatus.SC_NO_CONTENT);
+//	}
 	
 }
