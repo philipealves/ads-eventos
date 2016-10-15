@@ -1,13 +1,18 @@
 package br.com.iftm.adseventos.services.domain;
 
-public class EventPlace {
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(value=Include.NON_NULL)
+public class Place {
+	
 	private Long id;
 	private String address;
-	private String number;
+	private Integer number;
 	private String neighborhood;
 	private City city;
 
-	public EventPlace() {
+	public Place() {
 		super();
 	}
 
@@ -19,11 +24,11 @@ public class EventPlace {
 		this.id = id;
 	}
 
-	public String getNumber() {
+	public Integer getNumber() {
 		return number;
 	}
 
-	public void setNumber(String number) {
+	public void setNumber(Integer number) {
 		this.number = number;
 	}
 

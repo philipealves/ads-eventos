@@ -1,6 +1,11 @@
 package br.com.iftm.adseventos.services.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(value=Include.NON_NULL)
 public class City {
+	
 	private Long id;
 	private String name;
 	private State state;
