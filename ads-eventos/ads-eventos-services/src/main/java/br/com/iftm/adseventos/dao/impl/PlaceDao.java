@@ -10,7 +10,8 @@ import br.com.iftm.adseventos.dao.interfaces.IPlaceDao;
 import br.com.iftm.adseventos.dao.mysql.MySQLGenericDao;
 import br.com.iftm.adseventos.services.domain.Place;
 
-public class PlaceDao extends MySQLGenericDao<Place> implements IPlaceDao  {
+//public class PlaceDao extends MySQLGenericDao<Place> implements IPlaceDao  {
+public class PlaceDao implements IPlaceDao  {
 	
 	@PersistenceContext(name="ADSEventosPU")
 	private EntityManager manager;
