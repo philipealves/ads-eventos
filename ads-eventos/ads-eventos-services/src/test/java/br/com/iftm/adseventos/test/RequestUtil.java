@@ -10,6 +10,8 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class RequestUtil implements ITestingRequest {
 	
 	public <T> Response doPost(String uri, T entity) {
@@ -54,7 +56,7 @@ public class RequestUtil implements ITestingRequest {
 		
 	}
 
-	public <T> Response doGet(String uri, Map<String, Object> queryParams) {
+	public Response doGet(String uri, Map<String, Object> queryParams) {
 		
 		try {
 			ResteasyClient client = new ResteasyClientBuilder().build();
@@ -65,8 +67,13 @@ public class RequestUtil implements ITestingRequest {
 			}
 			
 			Response response = target.request().get();
+			final ObjectMapper mapper = new ObjectMapper();
+			System.out.println(mapper.writeValueAsString(response));
 			response.close();
 			return response;
+		} catch(Exception e) {
+			e.printStackTrace();
+			return null;
 		} catch(Throwable e) {
 			throw e;
 		}

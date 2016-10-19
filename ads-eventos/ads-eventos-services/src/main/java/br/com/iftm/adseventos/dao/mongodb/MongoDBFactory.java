@@ -1,4 +1,4 @@
-package br.com.iftm.adseventos.dao;
+package br.com.iftm.adseventos.dao.mongodb;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;

@@ -36,6 +36,6 @@ public interface ITestingRequest {
 	 * @param queryParam
 	 * @return
 	 */
-	<T> Response doGet(String uri, Map<String, Object> queryParam);
+	Response doGet(String uri, Map<String, Object> queryParam);
 	
 }
