@@ -1,4 +1,4 @@
-package br.com.iftm.adseventos.dao;
+package br.com.iftm.adseventos.dao.mongodb;
 
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
@@ -14,17 +14,10 @@ final class MongoDBFactory {
 	private static MongoDatabase dataBase;
 	
 	private MongoDBFactory() {
-		connect();
-	}
-	
-	/**
-	 * Realiza uma conexão no banco de dados MongoDB
-	 */
-	private static void connect() {
 		client = new MongoClient("localhost", 27017);
 		dataBase = client.getDatabase("ads-eventos");
 	}
-	
+
 	/**
 	 * Recupera a conexão com a base de dados
 	 * @return
@@ -32,7 +25,7 @@ final class MongoDBFactory {
 	public synchronized static MongoDatabase getDataBase() {
 		
 		if(dataBase == null) {
-			connect();
+			new MongoClient();
 		}
 		
 		return dataBase;

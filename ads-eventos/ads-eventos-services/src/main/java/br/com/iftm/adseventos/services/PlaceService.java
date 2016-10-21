@@ -1,5 +1,6 @@
 package br.com.iftm.adseventos.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -16,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.com.iftm.adseventos.dao.IPlaceDao;
+import br.com.iftm.adseventos.dao.interfaces.IPlaceDao;
 import br.com.iftm.adseventos.services.domain.Place;
 
 @Path("/place")
@@ -32,6 +33,9 @@ public class PlaceService {
 	public void add(Place place) {
 		try {
 			System.out.println("Add: " + new ObjectMapper().writeValueAsString(place));
+			if(place.getCity().getId() == null) {
+				
+			}
 			placeDao.save(place);
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -53,6 +57,17 @@ public class PlaceService {
 			e.printStackTrace();
 		}
 		return place;
+	}
+	
+	@GET
+	@Path("/findAll")
+	public List<Place> findAll() {
+		try {
+			return placeDao.findAll();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return new ArrayList<>();
 	}
 	
 	@GET

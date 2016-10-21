@@ -3,6 +3,9 @@ package br.com.iftm.adseventos.services.domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 public class Event {
 	
 	private Long id;

@@ -1,11 +1,12 @@
 package br.com.iftm.adseventos.test.service;
-import java.util.HashMap;
-
+import javax.validation.constraints.AssertTrue;
 import javax.ws.rs.core.Response;
 
 import org.apache.http.HttpStatus;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.iftm.adseventos.services.domain.City;
 import br.com.iftm.adseventos.services.domain.Place;
@@ -19,27 +20,41 @@ public class PlaceServiceTest extends RequestUtil {
 //	private ITestingRequest requestUtil;
 	
 	private static final String URL_BASE = "http://localhost:8080/ads-eventos-services/place";
+	private static final ObjectMapper mapper = new ObjectMapper();
 	
 	@Test
 	public void add() {
 		
 		State state = new State();
-		state.setName("Test Add Name");
+		state.setId(1L);
+		state.setName("Minas Gerais");
+		state.setInitials("MG");
 		
 		City city= new City();
-		city.setName("Test Add City");
+		city.setId(1L);
+		city.setName("Uberlândia");
 		city.setState(state);
 		
 		Place place = new Place();
-		place.setAddress("Test Add Address");
-		place.setNeighborhood("Test Add neighborhood");
-		place.setNumber(423);		
+		place.setAddress("Endereço JUnit 3");
+		place.setNeighborhood("Bairro JUnit 3");
+		place.setNumber(0);		
 		place.setCity(city);
 		
-		Response response = super.doPost(URL_BASE +"/add", place);
-		Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
-				response.getStatus() == HttpStatus.SC_NO_CONTENT);
+		try {
+			Response response = super.doPost(URL_BASE +"/add", place);
+			Assert.assertTrue("Erro ao executar o serviço!", response.getStatus() == HttpStatus.SC_OK || 
+					response.getStatus() == HttpStatus.SC_NO_CONTENT);
+		} catch (Exception e) {
+			Assert.assertTrue("Erro ao adicionar um lugar. Motivo" + e.getMessage(), false);
+		}
+		
 	}
+	
+//	@Test
+//	public void findAll() throws JsonProcessingException {
+//		Response response = super.doGet(URL_BASE +"/findAll", null);
+//	}
 	
 //	@Test
 //	public void deleteById() {
