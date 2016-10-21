@@ -5,23 +5,22 @@ app.service('LocalService', function($http) {
 	this.save = function(local) {
 		local.city = {
 				id: 1,
-				name: "Patos de Minas",
+				name: "Uberlândia",
 				state: {
 						id: 1,
-						name: "Minas Gerais"
+						name: "Minas Gerais",
+						initials: "MG"
 				}
 		}
 		return $http.post(serviceUrl + "/add", local);
 	}
 	
-	this.remove = function(local) {
-		alert("Remove");
-		return local;
+	this.remove = function(id) {
+		return $http.delete(serviceUrl + "/delete/" + id);
 	}
 	
 	this.findById = function(id) {
-		alert("findById");
-		return id;
+		return $http.get(serviceUrl + "/find/" + id);
 	}
 
 	this.findAll = function() {
