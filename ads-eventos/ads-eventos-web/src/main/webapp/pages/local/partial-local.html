@@ -1,3 +1,85 @@
-<div>
-	<h1>Local Page</h1>
+<div class="col-md-offset-2 col-md-8" data-ng-controller="LocalController as ctrl">
+	<div class="panel panel-info" data-ng-controller="LocalController as ctrl">
+		<div class="panel-heading">
+			<h3 class="panel-title">Cadastro de Local de Eventos</h3>
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="codigo" class="col-sm-2 control-label">Código</label>
+					<div class="col-sm-1">
+						<input type="text" class="form-control" id="codigo"  data-ng-model="local.id" disabled />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="logradouro" class="col-sm-2 control-label">Logradouro</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="logradouro" data-ng-model="local.address" />
+					</div>
+					<label for="numero" class="col-sm-1 control-label">Número</label>
+					<div class="col-sm-1">
+						<input type="text" class="form-control" id="numero" data-ng-model="local.number" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="bairro" class="col-sm-2 control-label">Bairro</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="bairro"  data-ng-model="local.neighborhood" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="estado" class="col-sm-2 control-label">Estado</label>
+					<div class="col-sm-2">
+						<select class="form-control">
+							<option></option>
+							<option>Estado</option>
+						</select>
+					</div>
+					
+					<label for="cidade" class="col-sm-2 control-label">Cidade</label>
+					<div class="col-sm-2">
+						<select class="form-control">
+							<option></option>
+							<option>Cidade</option>
+						</select>
+					</div>
+				</div>
+				<hr />
+				<div class="text-right">
+					<button type="submit" class="btn btn-default">Pesquisar</button>
+					<button type="submit" class="btn btn-success" data-ng-click="ctrl.save(local)">Salvar</button>				
+				</div>
+			</form>
+
+			<div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Endereço</th>
+							<th>Numero</th>
+							<th>Bairro</th>
+							<th>Cidade</th>
+							<th>Estado</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-ng-repeat="local in ctrl.locals">
+							<td>{{ local.id }}</td>
+							<td>{{ local.address }}</td>
+							<td>{{ local.number }}</td>
+							<td>{{ local.neighborhood }}</td>
+							<td>{{ local.city.name }}</td>
+							<td>{{ local.city.state.name }}</td>
+							<td>
+								<button type="submit" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"> </i></button>
+								<button type="submit" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"> </i></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>
