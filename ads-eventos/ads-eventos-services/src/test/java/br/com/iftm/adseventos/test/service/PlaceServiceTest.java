@@ -36,8 +36,8 @@ public class PlaceServiceTest extends RequestUtil {
 		city.setState(state);
 		
 		Place place = new Place();
-		place.setAddress("Endereço JUnit 2");
-		place.setNeighborhood("Bairro JUnit 2");
+		place.setAddress("Endereço JUnit 3");
+		place.setNeighborhood("Bairro JUnit 3");
 		place.setNumber(0);		
 		place.setCity(city);
 		

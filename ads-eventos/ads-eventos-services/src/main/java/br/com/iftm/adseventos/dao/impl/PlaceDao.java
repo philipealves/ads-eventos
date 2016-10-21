@@ -2,19 +2,13 @@ package br.com.iftm.adseventos.dao.impl;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
 import br.com.iftm.adseventos.dao.interfaces.IPlaceDao;
 import br.com.iftm.adseventos.dao.mysql.MySQLGenericDao;
 import br.com.iftm.adseventos.services.domain.Place;
 
-//public class PlaceDao extends MySQLGenericDao<Place> implements IPlaceDao  {
-public class PlaceDao implements IPlaceDao  {
-	
-	@PersistenceContext(name="ADSEventosPU")
-	private EntityManager manager;
+public class PlaceDao extends MySQLGenericDao<Place> implements IPlaceDao  {
 	
 	public PlaceDao() {
 		
@@ -26,8 +20,7 @@ public class PlaceDao implements IPlaceDao  {
 	 */
 	@Transactional
 	public void save(Place place) throws Exception {
-		//super.save(place);
-		manager.persist(place);
+		super.save(place);
 	}
 	
 	/*
@@ -40,7 +33,6 @@ public class PlaceDao implements IPlaceDao  {
 
 	@Override
 	public List<Place> findAll() throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

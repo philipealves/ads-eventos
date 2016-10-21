@@ -21,7 +21,8 @@ public class MySQLGenericDao<T> implements IGenericDao<T> {
 
 	@Override
 	public void update(T entity) throws Exception {
-		// TODO Auto-generated method stub
+		T merge = manager.merge(entity);
+		manager.persist(entity);
 	}
 
 	@Override
