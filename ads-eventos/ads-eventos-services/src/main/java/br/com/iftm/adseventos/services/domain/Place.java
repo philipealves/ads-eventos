@@ -35,6 +35,10 @@ public class Place {
 		super();
 	}
 
+	public Place(Long id2) {
+		this.id = id2;
+	}
+
 	public Long getId() {
 		return id;
 	}

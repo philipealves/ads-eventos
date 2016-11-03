@@ -6,7 +6,10 @@ import br.com.iftm.adseventos.services.domain.Place;
 
 public interface IPlaceDao {
 	
-	void save(Place place) throws Exception;
+	Place save(Place place) throws Exception;
+	void delete(Place place) throws Exception;
+	void update(Place place) throws Exception;
 	List<Place> findAll() throws Exception;
+	Place findById(Long id) throws Exception;
 	
 }

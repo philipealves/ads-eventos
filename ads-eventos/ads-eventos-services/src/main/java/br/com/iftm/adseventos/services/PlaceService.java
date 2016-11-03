@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -30,49 +31,60 @@ public class PlaceService {
 	
 	@POST
 	@Path("/add")
-	public void add(Place place) {
+	public Place add(Place place) {
 		try {
-			System.out.println("Add: " + new ObjectMapper().writeValueAsString(place));
-			if(place.getCity().getId() == null) {
-				
-			}
-			placeDao.save(place);
+			return placeDao.save(place);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		return new Place();
 	}
 	
 	@DELETE
 	@Path("/delete/{id}")
 	public void delete(@PathParam("id") Long id) {
-		System.out.println("ID to delete: " + id);
+
+		try {
+			System.out.println("id to delete: "+ id);
+			placeDao.delete(new Place(id));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@PUT
 	@Path("/update")
 	public Place update(Place place) {
+		
 		try {
 			System.out.println("Update: " + new ObjectMapper().writeValueAsString(place));
+			placeDao.update(place);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 		return place;
 	}
 	
 	@GET
 	@Path("/findAll")
 	public List<Place> findAll() {
+		
 		try {
 			return placeDao.findAll();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 		return new ArrayList<>();
 	}
 	
 	@GET
 	@Path("/find")
 	public List<Place> find(@QueryParam("place") String placeAsJson) {
+		
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			Place place = mapper.readValue(placeAsJson, Place.class);
@@ -80,14 +92,22 @@ public class PlaceService {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
 		return null;
 	}
 	
 	@GET
 	@Path("/find/{id}")
 	public Place findById(@PathParam("id") Long id) {
-		System.out.println("ID to find: " + id);
+		
+		try {
+			return placeDao.findById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return null;
+		
 	}
 	
 }
