@@ -1,7 +1,9 @@
 package br.com.iftm.adseventos.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -11,12 +13,16 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
+import br.com.iftm.adseventos.dao.impl.IEventDao;
 import br.com.iftm.adseventos.services.domain.Event;
 
 @Path("/event")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class EventService {
+	
+	@Inject
+	private IEventDao eventDao;
 	
 	@POST
 	@Path("/signIn/{id}")
@@ -26,14 +32,42 @@ public class EventService {
 	
 	@POST
 	@Path("/add")
-	public void add(Event event) {
+	public Event add(Event event) {
 		
+		try {
+			event = eventDao.add(event);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return event;
 	}
 	
 	@GET
-	@Path("/find")
-	public List<Event> find(Event event) {
-		return null;
+	@Path("/find/{id}")
+	public Event findById(Long id) {
+		
+		try {
+			return eventDao.findById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		return new Event();
+	}
+	
+	@GET
+	@Path("/findAll")
+	public List<Event> findAll() {
+List<Event> events = new ArrayList<>();
+		
+		try {
+			events = eventDao.findAll();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		return events;
 	}
 	
 }

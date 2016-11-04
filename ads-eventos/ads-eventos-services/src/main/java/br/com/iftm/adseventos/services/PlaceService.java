@@ -82,21 +82,6 @@ public class PlaceService {
 	}
 	
 	@GET
-	@Path("/find")
-	public List<Place> find(@QueryParam("place") String placeAsJson) {
-		
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			Place place = mapper.readValue(placeAsJson, Place.class);
-			System.out.println("Find by filters: "+ mapper.writeValueAsString(place));
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
-	
-	@GET
 	@Path("/find/{id}")
 	public Place findById(@PathParam("id") Long id) {
 		
