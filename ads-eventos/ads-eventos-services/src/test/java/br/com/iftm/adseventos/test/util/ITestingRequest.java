@@ -1,8 +1,8 @@
-package br.com.iftm.adseventos.test;
+package br.com.iftm.adseventos.test.util;
 
 import java.util.Map;
 
-import javax.ws.rs.core.Response;
+import br.com.iftm.adseventos.test.domain.TestResponse;
 
 
 public interface ITestingRequest {
@@ -13,14 +13,14 @@ public interface ITestingRequest {
 	 * @param entity
 	 * @return
 	 */
-	<T> Response doPost(String uri, T entity);
+	<T> TestResponse doPost(String uri, T entity) throws Exception;
 	
 	/**
 	 * Realiza uma requisição DELETE para a URI informada
 	 * @param uri
 	 * @return
 	 */
-	Response doDelete(String uri);
+	TestResponse doDelete(String uri) throws Exception;
 	
 	/**
 	 * Realiza uma requisição PUT para a URI informada e com o entity no body da requisição
@@ -28,14 +28,15 @@ public interface ITestingRequest {
 	 * @param entity
 	 * @return
 	 */
-	<T> Response doUpdate(String uri, T entity);
+	<T> TestResponse doUpdate(String uri, T entity) throws Exception;
 	
 	/**
 	 * Realiza uma requisição GET para a URI informada passando o
 	 * @param uri
 	 * @param queryParam
 	 * @return
+	 * @throws Exception 
 	 */
-	Response doGet(String uri, Map<String, Object> queryParam);
+	TestResponse doGet(String uri, Map<String, Object> queryParam) throws Exception;
 	
 }
