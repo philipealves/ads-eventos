@@ -1,13 +1,19 @@
 package br.com.iftm.adseventos.services.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 public class Event {
+	
 	private Long id;
 	private String name;
 	private String description;
 	private LocalDateTime date;
-	private EventPlace eventPlace;
+	private Place eventPlace;
+	private List<Participant> participants;
 
 	public Event() {
 		super();
@@ -45,12 +51,20 @@ public class Event {
 		this.date = date;
 	}
 
-	public EventPlace getEventPlace() {
+	public Place getEventPlace() {
 		return eventPlace;
 	}
 
-	public void setEventPlace(EventPlace eventPlace) {
+	public void setEventPlace(Place eventPlace) {
 		this.eventPlace = eventPlace;
+	}
+
+	public List<Participant> getParticipants() {
+		return participants;
+	}
+
+	public void setParticipants(List<Participant> participants) {
+		this.participants = participants;
 	}
 
 }
