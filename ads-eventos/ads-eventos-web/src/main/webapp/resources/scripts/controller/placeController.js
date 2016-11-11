@@ -1,9 +1,11 @@
 app.controller('PlaceController', function(PlaceService, StateService, CityService) {
+	
 	var controller = this;
 
-	findStates();
-	
-	getAll();
+	controller.init = function() {
+		findStates();
+		getAll();		
+	}
 
 	controller.save = function() {
 		save();
@@ -28,14 +30,18 @@ app.controller('PlaceController', function(PlaceService, StateService, CityServi
 	controller.findCities = function() {
 		findCities();
 	}
-	
+
 	controller.listCities = function(id) {
 		listCities(id);
 	}
 
+	controller.clear = function(id) {
+		clear();
+	}
+
 	function save() {
 		PlaceService.save(controller.place).success(function(data) {
-			controller.place = {};
+			clear();
 			getAll();
 		}).error(function(err) {
 			console.log(err);
@@ -44,7 +50,7 @@ app.controller('PlaceController', function(PlaceService, StateService, CityServi
 
 	function update() {
 		PlaceService.update(controller.place).success(function(data) {
-			controller.place = {};
+			clear();
 			getAll();
 		}).error(function(err) {
 			console.log(err);
@@ -62,6 +68,7 @@ app.controller('PlaceController', function(PlaceService, StateService, CityServi
 	function findById(id) {
 		PlaceService.findById(id).success(function(data) {
 			controller.place = data;
+			listCities(data.city.state.id);
 		}).error(function(err) {
 			console.log(err);
 		});
@@ -74,7 +81,7 @@ app.controller('PlaceController', function(PlaceService, StateService, CityServi
 			console.log(err);
 		});
 	}
-	
+
 	function findStates() {
 		StateService.findAll().success(function(data) {
 			controller.states = data;
@@ -82,13 +89,17 @@ app.controller('PlaceController', function(PlaceService, StateService, CityServi
 			console.log(err);
 		});
 	}
-	
+
 	function listCities(id) {
 		CityService.findByState(id).success(function(data) {
 			controller.cities = data;
 		}).error(function(err) {
 			console.log(err);
 		});
+	}
+
+	function clear() {
+		controller.place = {};
 	}
 
 });
