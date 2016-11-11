@@ -14,9 +14,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url : '/event',
 		templateUrl : 'pages/event/partial-event.html'
 	})
-	.state('local', {
-		url : '/local',
-		templateUrl : 'pages/local/partial-local.html'
+	.state('place', {
+		url : '/place',
+		templateUrl : 'pages/place/partial-place.html'
 	})
 	.state('participant', {
 		url : '/participant',
