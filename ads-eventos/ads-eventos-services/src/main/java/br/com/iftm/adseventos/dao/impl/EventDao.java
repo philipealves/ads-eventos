@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import br.com.iftm.adseventos.dao.mysql.MySQLGenericDao;
 import br.com.iftm.adseventos.services.domain.Event;
 
-public class EventDao extends MySQLGenericDao<Event> implements IEventDao{
+public class EventDao extends MySQLGenericDao<Event> implements IEventDao {
 
 	/* (non-Javadoc)
 	 * @see br.com.iftm.adseventos.dao.impl.IEventDao#add(br.com.iftm.adseventos.services.domain.Event)
@@ -17,6 +17,12 @@ public class EventDao extends MySQLGenericDao<Event> implements IEventDao{
 	@Transactional
 	public Event add(Event event) throws Exception {
 		return super.save(event);
+	}
+	
+	@Override
+	@Transactional
+	public void update(Event entity) throws Exception {
+		super.update(entity);
 	}
 	
 	/* (non-Javadoc)
