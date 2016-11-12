@@ -18,9 +18,6 @@ import br.com.iftm.adseventos.test.util.RequestUtil;
 
 public class PlaceServiceTest extends RequestUtil {
 	
-	private static final String URL_BASE = "http://localhost:8080/ads-eventos-services/place";
-	private static final ObjectMapper mapper = new ObjectMapper();
-	
 	@Test
 	public void add() {
 		
@@ -38,7 +35,7 @@ public class PlaceServiceTest extends RequestUtil {
 		
 		try {
 			
-			TestResponse response = super.doGet(URL_BASE +"/findAll", null);
+			TestResponse response = super.doGet(URL_BASE +"/place/findAll", null);
 			Assert.assertTrue("Ocorreu um erro na consulta dos lugares!", 
 					response.getStatus().getStatusCode() == HttpStatus.SC_OK || 
 					response.getStatus().getStatusCode() == HttpStatus.SC_NO_CONTENT);
@@ -79,7 +76,7 @@ public class PlaceServiceTest extends RequestUtil {
 			Place place = doAdd();
 			
 			//deleta
-			TestResponse response = super.doDelete(URL_BASE + "/delete/" + place.getId());
+			TestResponse response = super.doDelete(URL_BASE + "/place/delete/" + place.getId());
 			Assert.assertTrue("Erro ao tentar deletar o lugar!", 
 					response.getStatus().getStatusCode() == HttpStatus.SC_OK || 
 					response.getStatus().getStatusCode() == HttpStatus.SC_NO_CONTENT);
@@ -113,7 +110,7 @@ public class PlaceServiceTest extends RequestUtil {
 			
 			//atualiza
 			place.setAddress(addressAfter);
-			TestResponse response = super.doUpdate(URL_BASE + "/update", place);
+			TestResponse response = super.doUpdate(URL_BASE + "/place/update", place);
 			Assert.assertTrue("Erro ao atualizar o lugar!", 
 					response.getStatus().getStatusCode() == HttpStatus.SC_OK || 
 					response.getStatus().getStatusCode() == HttpStatus.SC_NO_CONTENT);
@@ -134,7 +131,7 @@ public class PlaceServiceTest extends RequestUtil {
 		
 		try {
 			
-			TestResponse response = super.doGet(URL_BASE +"/findAll", null);
+			TestResponse response = super.doGet(URL_BASE +"/place/findAll", null);
 			Assert.assertTrue("Ocorreu um erro na consulta dos lugares!", 
 					response.getStatus().getStatusCode() == HttpStatus.SC_OK || 
 					response.getStatus().getStatusCode() == HttpStatus.SC_NO_CONTENT);
@@ -154,7 +151,7 @@ public class PlaceServiceTest extends RequestUtil {
 
 		try {
 			
-			TestResponse response = super.doGet(URL_BASE + "/find/" + id);
+			TestResponse response = super.doGet(URL_BASE + "/place/find/" + id);
 			place = mapper.readValue(response.getContent(), Place.class);
 			
 			Assert.assertTrue("Erro ao consultar o lugar!", 
@@ -189,7 +186,7 @@ public class PlaceServiceTest extends RequestUtil {
 			place.setNumber(0);		
 			place.setCity(city);
 			
-			TestResponse response = super.doPost(URL_BASE +"/add", place);
+			TestResponse response = super.doPost(URL_BASE +"/place/add", place);
 			place = mapper.readValue(response.getContent(), Place.class);
 			Assert.assertTrue("Erro ao adicionar o lugar!", 
 					response.getStatus().getStatusCode() == HttpStatus.SC_OK || 
