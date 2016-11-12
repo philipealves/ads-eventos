@@ -32,7 +32,7 @@
 					<div class="col-sm-2">
 						<select class="form-control" name="stateSelect" id="stateSelect"
 								data-ng-options="state.name for state in ctrl.states track by state.id"
-								data-ng-model="ctrl.place.city.state" data-ng-change="ctrl.listCities(state.id)">
+								data-ng-model="ctrl.place.city.state" data-ng-change="ctrl.listCities(ctrl.place.city.state.id)">
 						</select>
 					</div>
 					
