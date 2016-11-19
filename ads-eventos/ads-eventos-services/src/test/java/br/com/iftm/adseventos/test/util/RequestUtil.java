@@ -10,9 +10,14 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import br.com.iftm.adseventos.test.domain.TestResponse;
 
 public class RequestUtil implements ITestingRequest {
+	
+	protected static final String URL_BASE = "http://localhost:8080/ads-eventos-services";
+	protected static final ObjectMapper mapper = new ObjectMapper();
 	
 	public <T> TestResponse doPost(String uri, T entity) throws Exception {
 		
