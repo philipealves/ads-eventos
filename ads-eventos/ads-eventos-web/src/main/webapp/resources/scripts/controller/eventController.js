@@ -60,7 +60,6 @@ app.controller('EventController', function(EventService, PlaceService) {
 	function findById(id) {
 		EventService.findById(id).success(function(data) {
 			controller.event = data;
-			listCities(data.city.state.id);
 		}).error(function(err) {
 			console.log(err);
 		});
