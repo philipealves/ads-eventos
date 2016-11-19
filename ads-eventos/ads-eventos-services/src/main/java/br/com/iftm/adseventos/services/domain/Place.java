@@ -10,25 +10,28 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="place")
+@Table(name = "place")
 public class Place {
-	
+
 	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name="address")
+
+	@Column(name = "nickname")
+	private String nickname;
+
+	@Column(name = "address")
 	private String address;
-	
-	@Column(name="number")
+
+	@Column(name = "number")
 	private Integer number;
-	
-	@Column(name="neighborhood")
+
+	@Column(name = "neighborhood")
 	private String neighborhood;
-	
+
 	@OneToOne
-	@JoinColumn(name="id_city")
+	@JoinColumn(name = "id_city")
 	private City city;
 
 	public Place() {
@@ -45,6 +48,14 @@ public class Place {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public Integer getNumber() {

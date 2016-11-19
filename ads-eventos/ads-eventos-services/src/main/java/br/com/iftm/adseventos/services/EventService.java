@@ -26,8 +26,8 @@ public class EventService {
 	@Inject
 	private IEventDao eventDao;
 	
-	@Inject
-	private IParticipantDao participantDao;
+//	@Inject
+//	private IParticipantDao participantDao;
 	
 	@POST
 	@Path("/signIn/{id}")
