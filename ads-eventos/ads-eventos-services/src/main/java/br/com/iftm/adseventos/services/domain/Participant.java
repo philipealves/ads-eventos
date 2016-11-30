@@ -1,5 +1,6 @@
 package br.com.iftm.adseventos.services.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,8 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 @Entity
 @Table(name="participant")
+@JsonInclude(Include.NON_NULL)
 public class Participant {
 
 	@Id
@@ -57,6 +62,11 @@ public class Participant {
 	}
 
 	public List<Event> getEvents() {
+		
+		if(events == null) {
+			events = new ArrayList<>();
+		}
+		
 		return events;
 	}
 

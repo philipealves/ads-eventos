@@ -33,6 +33,25 @@ public class RequestUtil implements ITestingRequest {
 		
 	}
 	
+	public <T> TestResponse doPost(String uri, T entity, Map<String, Object> queryParams) throws Exception {
+	
+		try {
+			
+			ResteasyClient client = new ResteasyClientBuilder().build();
+			ResteasyWebTarget target = client.target(uri);
+			
+			if(queryParams != null) {
+				queryParams.forEach((paramName, paramValue) -> target.queryParam(paramName, paramValue));
+			}
+			
+			return catchResponse(target.request().post(Entity.entity(entity, MediaType.APPLICATION_JSON)));
+			
+		} catch(Exception e) {
+			throw e;
+		}
+		
+	}
+	
 	public TestResponse doDelete(String uri) throws Exception {
 		
 		try {
@@ -93,11 +112,11 @@ public class RequestUtil implements ITestingRequest {
 	}
 	
 	private TestResponse catchResponse(Response response) {
-		TestResponse result = new TestResponse();
-		result.setContent(response.readEntity(String.class));
-		result.setStatus(response.getStatus());
-		response.close();
-		return result;
+			TestResponse result = new TestResponse();
+			result.setContent(response.readEntity(String.class));
+			result.setStatus(response.getStatus());
+			response.close();
+			return result;
 	}
 	
 }
