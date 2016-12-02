@@ -1,12 +1,16 @@
 package br.com.iftm.adseventos.dao.impl;
 
-import java.util.HashMap;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import br.com.iftm.adseventos.dao.mysql.MySQLGenericDao;
 import br.com.iftm.adseventos.services.domain.Event;
+import br.com.iftm.adseventos.services.domain.Participant;
 
 public class EventDao extends MySQLGenericDao<Event> implements IEventDao {
 
@@ -37,19 +41,17 @@ public class EventDao extends MySQLGenericDao<Event> implements IEventDao {
 	 * @see br.com.iftm.adseventos.dao.impl.IEventDao#findById(java.lang.Long)
 	 */
 	@Override
+	@Transactional
 	public Event findById(Long id) throws Exception {
 		
-		String hql = "from Event where id = :id";
-		HashMap<String, Object> params = new HashMap<>();
+		Event response = new Event();
 		
-		params.put("id", id);
-		List<Event> events = super.findByHql(hql, params);
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<Event> query = builder.createQuery(Event.class);
+		Root<Event> event = query.from(Event.class);
+		Join<Event, Participant> join = event.join("participants");
 		
-		if(events == null || events.isEmpty()) {
-			return new Event();
-		}
-		
-		return events.get(0);
+		return response;
 		
 	}
 	

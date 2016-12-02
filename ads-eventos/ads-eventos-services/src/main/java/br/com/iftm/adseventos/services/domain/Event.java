@@ -20,11 +20,10 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="event")
-@JsonInclude(Include.NON_NULL)
+@JsonInclude(Include.NON_EMPTY)
 public class Event {
 	
 	@Id
@@ -98,14 +97,15 @@ public class Event {
 	}
 
 	public List<Participant> getParticipants() {
-		return participants;
-	}
-
-	public void setParticipants(List<Participant> participants) {
+		
 		if(participants == null) {
 			participants = new ArrayList<>();
 		}
 		
+		return participants;
+	}
+
+	public void setParticipants(List<Participant> participants) {
 		this.participants = participants;
 	}
 

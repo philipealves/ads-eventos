@@ -6,14 +6,13 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 
 import br.com.iftm.adseventos.dao.interfaces.IGenericDao;
 
 public class MySQLGenericDao<T> implements IGenericDao<T> {
 	
 	@PersistenceContext(name="ADSEventosPU")
-	private EntityManager manager;
+	protected EntityManager manager;
 	
 	@Override
 	public T save(T entity) throws Exception {
@@ -52,6 +51,5 @@ public class MySQLGenericDao<T> implements IGenericDao<T> {
 		
 		return (List<T>) query.getResultList();
 	}
-	
 	
 }
