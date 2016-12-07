@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
@@ -30,9 +31,10 @@ public class Participant {
 	@Column(name="email")
 	private String email;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy="participants")
 	private List<Event> events;
-
+	
 	public Participant() {
 		super();
 	}
@@ -73,5 +75,5 @@ public class Participant {
 	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
-	
+
 }
