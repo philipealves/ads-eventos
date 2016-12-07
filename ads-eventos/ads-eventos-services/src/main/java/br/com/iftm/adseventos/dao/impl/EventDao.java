@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import br.com.iftm.adseventos.dao.interfaces.IEventDao;
 import br.com.iftm.adseventos.dao.mysql.MySQLGenericDao;
 import br.com.iftm.adseventos.services.domain.Event;
 
@@ -39,7 +40,6 @@ public class EventDao extends MySQLGenericDao<Event> implements IEventDao {
 	 * @see br.com.iftm.adseventos.dao.impl.IEventDao#findById(java.lang.Long)
 	 */
 	@Override
-	@Transactional
 	public Event findById(Long id) throws Exception {
 		
 		String hql = "from Event where id = :id";

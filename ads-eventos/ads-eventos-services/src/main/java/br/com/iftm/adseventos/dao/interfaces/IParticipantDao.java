@@ -1,4 +1,4 @@
-package br.com.iftm.adseventos.dao.impl;
+package br.com.iftm.adseventos.dao.interfaces;
 
 import br.com.iftm.adseventos.services.domain.Participant;
 

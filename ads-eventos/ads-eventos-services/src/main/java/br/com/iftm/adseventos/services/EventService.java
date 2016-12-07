@@ -13,8 +13,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import br.com.iftm.adseventos.dao.impl.IEventDao;
-import br.com.iftm.adseventos.dao.impl.IParticipantDao;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import br.com.iftm.adseventos.dao.interfaces.IEventDao;
+import br.com.iftm.adseventos.dao.interfaces.IParticipantDao;
 import br.com.iftm.adseventos.services.domain.Event;
 import br.com.iftm.adseventos.services.domain.Participant;
 
@@ -79,11 +81,11 @@ public class EventService {
 	
 	@GET
 	@Path("/find/{id}")
-	public Event findById(@PathParam("id") Long id) {
+	public String findById(@PathParam("id") Long id) {
 		
 		try {
 			Event event = eventDao.findById(id);
-			return event;
+			return new ObjectMapper().writeValueAsString(event);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
