@@ -21,5 +21,9 @@ app.service('EventService', function($http) {
 	this.findAll = function() {
 		return $http.get(serviceUrl + "/findAll");
 	};
+	
+	this.signIn = function(eventId, participant) {
+		return $http.post(serviceUrl + "/signIn/" + eventId, participant);
+	}
 
 });

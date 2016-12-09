@@ -3,6 +3,7 @@ package br.com.iftm.adseventos.services.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class Participant {
 	@Column(name="email")
 	private String email;
 
-	@ManyToMany(mappedBy="participants")
+	@ManyToMany(mappedBy="participants", cascade = CascadeType.ALL)
 	private List<Event> events;
 
 	public Participant() {

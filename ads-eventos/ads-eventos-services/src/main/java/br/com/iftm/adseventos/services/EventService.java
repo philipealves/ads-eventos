@@ -26,25 +26,28 @@ public class EventService {
 	@Inject
 	private IEventDao eventDao;
 
+	@Inject
+	private IParticipantDao participantDao;
+
 	@POST
 	@Path("/signIn/{id}")
 	public void signIn(Participant participant, @PathParam("id") Long eventId) {
 
 		try {
-			
+
 			Event event = eventDao.findById(eventId);
-			
-			if(event.getId() != null) {
+
+			if (event.getId() != null) {
 				participant = participantDao.add(participant);
 				event.getParticipants().add(participant);
 				participant.getEvents().add(event);
 				eventDao.update(event);
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@POST

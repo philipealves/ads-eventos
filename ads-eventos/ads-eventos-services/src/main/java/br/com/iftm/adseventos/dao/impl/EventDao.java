@@ -1,5 +1,6 @@
 package br.com.iftm.adseventos.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -11,6 +12,7 @@ import javax.transaction.Transactional;
 import br.com.iftm.adseventos.dao.mysql.MySQLGenericDao;
 import br.com.iftm.adseventos.services.domain.Event;
 import br.com.iftm.adseventos.services.domain.Participant;
+import br.com.iftm.adseventos.services.domain.Place;
 
 public class EventDao extends MySQLGenericDao<Event> implements IEventDao {
 
@@ -44,14 +46,26 @@ public class EventDao extends MySQLGenericDao<Event> implements IEventDao {
 	@Transactional
 	public Event findById(Long id) throws Exception {
 		
-		Event response = new Event();
+//		Event response = new Event();
+//		
+//		CriteriaBuilder builder = manager.getCriteriaBuilder();
+//		CriteriaQuery<Event> query = builder.createQuery(Event.class);
+//		Root<Event> event = query.from(Event.class);
+//		Join<Event, Participant> join = event.join("participants");
+//		
+//		return response;
 		
-		CriteriaBuilder builder = manager.getCriteriaBuilder();
-		CriteriaQuery<Event> query = builder.createQuery(Event.class);
-		Root<Event> event = query.from(Event.class);
-		Join<Event, Participant> join = event.join("participants");
+		String hql = "from Event where id = :id"; 
+		HashMap<String, Object> params = new HashMap<>();
 		
-		return response;
+		params.put("id", id);
+		List<Event> events = super.findByHql(hql, params);
+		
+		if(events == null || events.isEmpty()) {
+			return new Event();
+		}
+		
+		return events.get(0);
 		
 	}
 	

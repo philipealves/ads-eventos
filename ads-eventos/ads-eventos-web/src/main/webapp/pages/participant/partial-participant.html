@@ -1,3 +1,70 @@
-<div>
-	<h1>Participant Client</h1>
+<div class="col-md-offset-2 col-md-8" data-ng-controller="ParticipantController as ctrl" data-ng-init="ctrl.init()">
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title">Cadastro de Participantes</h3>
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<label for="evento" class="col-sm-2 control-label">Evento</label>
+					<div class="col-sm-2">
+						<select class="form-control" name="evento" id="evento"
+								data-ng-options="event.id as event.name for event in ctrl.events track by events.id"
+								data-ng-model="eventId">
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="codigo" class="col-sm-2 control-label">Código</label>
+					<div class="col-sm-1">
+						<input type="text" class="form-control" id="codigo"  data-ng-model="ctrl.participant.id" disabled />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nome" class="col-sm-2 control-label">Nome</label>
+					<div class="col-sm-8">
+						<input type="text" class="form-control" id="nome" data-ng-model="ctrl.event.name" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="email" class="col-sm-2 control-label">E-mail</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="email" data-ng-model="ctrl.participant.email" />
+					</div>
+				</div>
+				<hr />
+				<div class="form-group">
+					<div class=" text-right col-sm-offset-6 col-sm-4">
+						<input type="text" class="form-control" id="search" placeholder="Pesquisar..." data-ng-model="search.name" />
+					</div>
+					<button type="submit" class="btn btn-success" data-ng-show="eventId == null" data-ng-click="ctrl.save(eventId)">Salvar</button>
+					<button type="submit" class="btn btn-default" data-ng-click="ctrl.clear()">Limpar</button>	
+				</div>
+			</form>
+
+			<div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Nome</th>
+							<th>E-mail</th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr data-ng-repeat="participant in ctrl.participants | filter:search:strict">
+							<td>{{ participant.id }}</td>
+							<td>{{ participant.name }}</td>
+							<td>{{ participant.email }}</td>
+							<td>
+								<button type="submit" data-ng-click="ctrl.findById(participant.id)" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-pencil"> </i></button>
+								<button type="submit" data-ng-click="ctrl.remove(participant.id)" class="btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"> </i></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </div>

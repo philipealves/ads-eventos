@@ -183,7 +183,8 @@ public class EventServiceTest extends RequestUtil {
 			
 			place.setAddress("JUnit " + new Random().nextInt(100));
 			place.setNeighborhood("JUnit " + new Random().nextInt(100));
-			place.setNumber(0);		
+			place.setNumber(0);
+			place.setNickname("nickname");
 			place.setCity(city);
 			
 			TestResponse response = super.doPost(URL_BASE +"/place/add", place);
