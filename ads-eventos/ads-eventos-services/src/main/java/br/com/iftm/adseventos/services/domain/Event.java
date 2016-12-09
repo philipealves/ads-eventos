@@ -1,9 +1,9 @@
 package br.com.iftm.adseventos.services.domain;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,39 +20,37 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name="event")
-@JsonInclude(Include.NON_NULL)
+@Table(name = "event")
+@JsonInclude(Include.NON_EMPTY)
 public class Event {
-	
+
 	@Id
-	@Column(name="id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name="name")
+
+	@Column(name = "name")
 	private String name;
-	
-	@Column(name="description")
+
+	@Column(name = "description")
 	private String description;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="moment")
+	@Column(name = "moment")
 	private Date date;
-	
+
 	@OneToOne
-	@JoinColumn(name="id_place")
+	@JoinColumn(name = "id_place")
 	private Place eventPlace;
-	
-	@ManyToMany(fetch=FetchType.EAGER)
+
+	@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="event_participants", 
 		joinColumns = {@JoinColumn(name="id_event", nullable=false, updatable=false)},
-		inverseJoinColumns = {@JoinColumn(name="id_participant", nullable=false, updatable=false)}
-	)
+		inverseJoinColumns = {@JoinColumn(name="id_participant", nullable=false, updatable=false)})
 	private List<Participant> participants;
-
+	
 	public Event() {
 		super();
 	}
@@ -102,11 +100,7 @@ public class Event {
 	}
 
 	public void setParticipants(List<Participant> participants) {
-		if(participants == null) {
-			participants = new ArrayList<>();
-		}
-		
 		this.participants = participants;
 	}
-
+	
 }

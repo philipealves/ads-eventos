@@ -89,6 +89,45 @@ public class EventServiceTest extends RequestUtil {
 		
 	}
 	
+	@Test
+	public void signIn() {
+		
+		try {
+			
+			Event event = doAdd();
+			Participant participant;
+			TestResponse response;
+			int count = 0;
+			
+			do {
+				participant = new Participant();
+				participant.setEmail("participante@junit.com.br");
+				participant.setName("JUnit " + new Random().nextInt(100));
+				
+				event.getParticipants().add(participant);
+				response = super.doPost(URL_BASE + "/event/signIn/" + event.getId(), participant);
+				
+				count++;
+				Assert.assertTrue("Erro ao realizar a inscrição do evento: " + response.getContent(), 
+						response.getStatus().getStatusCode() == HttpStatus.SC_OK || 
+						response.getStatus().getStatusCode() == HttpStatus.SC_NO_CONTENT);
+				
+			} while(count < 2);
+			
+			event = doFindById(event.getId());
+			
+			if(event.getParticipants().isEmpty()) {
+				Assert.assertTrue("Os participantes não foram inseridos no evento. Motivo: " + response.getContent(),
+						false);
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			Assert.assertTrue("Erro ao realizar a inscrição no evento. Motivo: " + e, false);
+		}
+		
+	}
+	
 	private Event doAdd() {
 		
 		Event event = new Event();
@@ -144,7 +183,8 @@ public class EventServiceTest extends RequestUtil {
 			
 			place.setAddress("JUnit " + new Random().nextInt(100));
 			place.setNeighborhood("JUnit " + new Random().nextInt(100));
-			place.setNumber(0);		
+			place.setNumber(0);
+			place.setNickname("nickname");
 			place.setCity(city);
 			
 			TestResponse response = super.doPost(URL_BASE +"/place/add", place);

@@ -1,7 +1,9 @@
 package br.com.iftm.adseventos.services.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,8 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 @Entity
 @Table(name="participant")
+@JsonInclude(Include.NON_NULL)
 public class Participant {
 
 	@Id
@@ -25,9 +32,10 @@ public class Participant {
 	@Column(name="email")
 	private String email;
 
-	@ManyToMany(mappedBy="participants")
-	private List<Event> events;
-
+//	@JsonIgnore
+//	@ManyToMany(mappedBy="participants", cascade = CascadeType.ALL)
+//	private List<Event> events;
+	
 	public Participant() {
 		super();
 	}
@@ -55,13 +63,4 @@ public class Participant {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public List<Event> getEvents() {
-		return events;
-	}
-
-	public void setEvents(List<Event> events) {
-		this.events = events;
-	}
-	
 }

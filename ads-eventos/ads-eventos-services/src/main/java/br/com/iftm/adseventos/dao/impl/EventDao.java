@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import br.com.iftm.adseventos.dao.interfaces.IEventDao;
 import br.com.iftm.adseventos.dao.mysql.MySQLGenericDao;
 import br.com.iftm.adseventos.services.domain.Event;
 
@@ -49,6 +52,8 @@ public class EventDao extends MySQLGenericDao<Event> implements IEventDao {
 			return new Event();
 		}
 		
+		Event event = events.get(0);
+		System.out.println(new ObjectMapper().writeValueAsString(event));
 		return events.get(0);
 		
 	}

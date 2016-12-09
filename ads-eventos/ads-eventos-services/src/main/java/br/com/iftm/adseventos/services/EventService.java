@@ -13,8 +13,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import br.com.iftm.adseventos.dao.impl.IEventDao;
-import br.com.iftm.adseventos.dao.impl.IParticipantDao;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import br.com.iftm.adseventos.dao.interfaces.IEventDao;
+import br.com.iftm.adseventos.dao.interfaces.IParticipantDao;
 import br.com.iftm.adseventos.services.domain.Event;
 import br.com.iftm.adseventos.services.domain.Participant;
 
@@ -26,9 +28,27 @@ public class EventService {
 	@Inject
 	private IEventDao eventDao;
 
+	@Inject
+	private IParticipantDao participantDao;
+
 	@POST
 	@Path("/signIn/{id}")
 	public void signIn(Participant participant, @PathParam("id") Long eventId) {
+
+		try {
+
+			Event event = eventDao.findById(eventId);
+
+			if (event.getId() != null) {
+				participant = participantDao.add(participant);
+				event.getParticipants().add(participant);
+//				participant.getEvents().add(event);
+				eventDao.update(event);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 
@@ -61,11 +81,11 @@ public class EventService {
 
 	@GET
 	@Path("/find/{id}")
-	public Event findById(@PathParam("id") Long id) {
+	public String findById(@PathParam("id") Long id) {
 
 		try {
 			Event event = eventDao.findById(id);
-			return event;
+			return new ObjectMapper().writeValueAsString(event);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -75,16 +95,18 @@ public class EventService {
 
 	@GET
 	@Path("/findAll")
-	public List<Event> findAll() {
+	public String findAll() {
+		
 		List<Event> events = new ArrayList<>();
 
 		try {
 			events = eventDao.findAll();
+			return new ObjectMapper().writeValueAsString(events);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return events;
+		return null;
 	}
 
 }
