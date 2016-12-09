@@ -95,16 +95,18 @@ public class EventService {
 
 	@GET
 	@Path("/findAll")
-	public List<Event> findAll() {
+	public String findAll() {
+		
 		List<Event> events = new ArrayList<>();
 
 		try {
 			events = eventDao.findAll();
+			return new ObjectMapper().writeValueAsString(events);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return events;
+		return null;
 	}
 
 }
