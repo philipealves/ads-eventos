@@ -105,7 +105,7 @@ public class EventServiceTest extends RequestUtil {
 				participant.setName("JUnit " + new Random().nextInt(100));
 				
 				event.getParticipants().add(participant);
-				 response = super.doPost(URL_BASE + "/event/signIn/" + event.getId(), participant);
+				response = super.doPost(URL_BASE + "/event/signIn/" + event.getId(), participant);
 				
 				count++;
 				Assert.assertTrue("Erro ao realizar a inscrição do evento: " + response.getContent(), 

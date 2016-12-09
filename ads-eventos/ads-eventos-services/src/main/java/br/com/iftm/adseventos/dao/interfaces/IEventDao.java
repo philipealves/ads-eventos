@@ -1,4 +1,4 @@
-package br.com.iftm.adseventos.dao.impl;
+package br.com.iftm.adseventos.dao.interfaces;
 
 import java.util.List;
 

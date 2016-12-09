@@ -2,6 +2,7 @@ package br.com.iftm.adseventos.dao.impl;
 
 import javax.transaction.Transactional;
 
+import br.com.iftm.adseventos.dao.interfaces.IParticipantDao;
 import br.com.iftm.adseventos.dao.mysql.MySQLGenericDao;
 import br.com.iftm.adseventos.services.domain.Participant;
 
