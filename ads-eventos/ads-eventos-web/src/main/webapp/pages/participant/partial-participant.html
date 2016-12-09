@@ -10,6 +10,7 @@
 					<div class="col-sm-2">
 						<select class="form-control" name="evento" id="evento"
 								data-ng-options="event.id as event.name for event in ctrl.events track by events.id"
+								data-ng-change="ctrl.findEventById(eventId)"
 								data-ng-model="eventId">
 						</select>
 					</div>
@@ -23,7 +24,7 @@
 				<div class="form-group">
 					<label for="nome" class="col-sm-2 control-label">Nome</label>
 					<div class="col-sm-8">
-						<input type="text" class="form-control" id="nome" data-ng-model="ctrl.event.name" />
+						<input type="text" class="form-control" id="nome" data-ng-model="ctrl.participant.name" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -37,7 +38,7 @@
 					<div class=" text-right col-sm-offset-6 col-sm-4">
 						<input type="text" class="form-control" id="search" placeholder="Pesquisar..." data-ng-model="search.name" />
 					</div>
-					<button type="submit" class="btn btn-success" data-ng-show="eventId == null" data-ng-click="ctrl.save(eventId)">Salvar</button>
+					<button type="submit" class="btn btn-success" data-ng-show="eventId != null" data-ng-click="ctrl.signIn(eventId)">Salvar</button>
 					<button type="submit" class="btn btn-default" data-ng-click="ctrl.clear()">Limpar</button>	
 				</div>
 			</form>
@@ -53,7 +54,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr data-ng-repeat="participant in ctrl.participants | filter:search:strict">
+						<tr data-ng-repeat="participant in ctrl.event.participants | filter:search:strict">
 							<td>{{ participant.id }}</td>
 							<td>{{ participant.name }}</td>
 							<td>{{ participant.email }}</td>

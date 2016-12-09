@@ -32,9 +32,9 @@ public class Participant {
 	@Column(name="email")
 	private String email;
 
-	@JsonIgnore
-	@ManyToMany(mappedBy="participants", cascade = CascadeType.ALL)
-	private List<Event> events;
+//	@JsonIgnore
+//	@ManyToMany(mappedBy="participants", cascade = CascadeType.ALL)
+//	private List<Event> events;
 	
 	public Participant() {
 		super();
@@ -63,18 +63,4 @@ public class Participant {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
-	public List<Event> getEvents() {
-		
-		if(events == null) {
-			events = new ArrayList<>();
-		}
-		
-		return events;
-	}
-
-	public void setEvents(List<Event> events) {
-		this.events = events;
-	}
-
 }

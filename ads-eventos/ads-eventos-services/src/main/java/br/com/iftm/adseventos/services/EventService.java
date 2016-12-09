@@ -42,7 +42,7 @@ public class EventService {
 			if (event.getId() != null) {
 				participant = participantDao.add(participant);
 				event.getParticipants().add(participant);
-				participant.getEvents().add(event);
+//				participant.getEvents().add(event);
 				eventDao.update(event);
 			}
 
